@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2020",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "types": [
+      "mocha",
+      "chai"
+    ]
+  },
+  "lib": [
+    "es2020"
+  ]
+}
