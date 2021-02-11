@@ -1,6 +1,43 @@
 # Pokemon's description service
 Service provide information about Pokemons. 
 
+
+## Requirements
+* Node.js 12+
+
+## Install requirements
+
+* Install node and npm (https://nodejs.org/it/)
+* Check in your console
+    * `node --version`
+    * `npm --version`
+
+## Run service
+
+Use following commands in project root:
+
+* Create `.env` file from `.env_dist` template. (see Env Variables chapter)
+* Install dependencies with `npm i` command
+* Use `npm start` to start project 
+
+## Tests
+
+Use following commands in project root:
+
+* Create `.env.test` file from `.env_dist` template. (see Env Variables chapter)
+* Install dependencies with `npm i` command
+* Run suite with `npm run test`
+
+## Env Variables
+
+Descriptions of variables in `.env` files. See `.env_dist` as example.
+
+* **PORT:** port of http server
+* **LOG_LEVEL:** (debug|info|warning|error) level of logs 
+* **FUN_TRANSLATION_KEY:** key for translation service. If empty, the api will be called with rate limit. [(see documentation)](https://funtranslations.com/api/shakespeare)
+* **LOG_IN_FILE:** (true|false) if true, logs must be stored in log folder
+
+
 ## Api documentation
 
 #### Pokemon description
@@ -8,7 +45,7 @@ Provide a description of Pokemons in Shakespearean style.
 
 **Url:** pokemon/:name
 
-**Url Params:** 
+**Url Params:**
 * name: (mandatory) is a name of Pokemon
 
 **Success Response:**
@@ -23,36 +60,3 @@ Return the name of the Pokemon and its description
   "description": "Ditto was incredible"
 }
 ```
-
-## Development
-
-### Requirements
-* Node.js 12+
-
-### Install requirements
-
-* Install node and npm (https://nodejs.org/it/)
-* Check in your console
-    * `node --version`
-    * `npm --version`
-
-### Run service
-
-Use those commands in project root:
-
-* (Only once): Install dependencies with `npm i` command
-* Use `npm start` to start project 
-
-## Tests
-
-Use those commands in project root:
-
-* (Only once): Install dependencies with `npm i` command
-* Run suite with `npm run test`
-
-### Involved technologies
-
-* Node.js
-* Typescript 
-
-

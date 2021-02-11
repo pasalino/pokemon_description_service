@@ -9,10 +9,12 @@
     "baseUrl": "./src",
     "types": [
       "mocha",
-      "chai"
+      "chai",
+      "node"
     ]
   },
   "lib": [
     "es2020"
-  ]
+  ],
+  "include": ["./src"],
 }

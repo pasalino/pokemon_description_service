@@ -1,6 +1,8 @@
 dist
 node_modules
 todolist.txt
-.env
+.env.development
+.env*
+log
 
 .idea
