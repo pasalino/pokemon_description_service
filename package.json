@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "http-status-code": "^2.1.0",
     "http-status-codes": "^2.1.4",
+    "nock": "^13.0.7",
     "status-code": "^0.1.0",
     "winston": "^3.3.3"
   }

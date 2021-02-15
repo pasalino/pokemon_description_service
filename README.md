@@ -36,6 +36,7 @@ Descriptions of variables in `.env` files. See `.env_dist` as example.
 * **LOG_LEVEL:** (debug|info|warning|error) level of logs 
 * **FUN_TRANSLATION_KEY:** key for translation service. If empty, the api will be called with rate limit. [(see documentation)](https://funtranslations.com/api/shakespeare)
 * **LOG_IN_FILE:** (true|false) if true, logs must be stored in log folder
+* **EXTERNAL_API_TIMEOUT:** (millisecs) if 0 external apis haven't timeout
 
 
 ## Api documentation
