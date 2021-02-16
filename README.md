@@ -37,6 +37,7 @@ Descriptions of variables in `.env` files. See `.env_dist` as example.
 * **FUN_TRANSLATION_KEY:** key for translation service. If empty, the api will be called with rate limit. [(see documentation)](https://funtranslations.com/api/shakespeare)
 * **LOG_IN_FILE:** (true|false) if true, logs must be stored in log folder
 * **EXTERNAL_API_TIMEOUT:** (millisecs) if 0 external apis haven't timeout
+* **POKEMON_GAME_VERSION:** (name of version) pokemon game's version used to retrieve pokemon. Different versions haven't same pokemons. See pokemon game's version on `https://pokeapi.co/api/v2/version/`
 
 
 ## Api documentation

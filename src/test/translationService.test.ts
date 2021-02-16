@@ -65,7 +65,7 @@ describe('Shakespearean Translation Service', () => {
         let env;
         before(() => env = process.env);
 
-        it('should throw error if exteral call has timeout', async () => {
+        it('should throw error if external call has timeout', async () => {
             const timeout = 200;
             process.env.EXTERNAL_API_TIMEOUT = timeout.toString();
 
@@ -89,7 +89,7 @@ describe('Shakespearean Translation Service', () => {
         let env;
         before(() => env = process.env);
 
-        it('should call external translation service with header if FUN_TRANSLATION_KEY enviroment is set', async () => {
+        it('should call external translation service with header if FUN_TRANSLATION_KEY environment is set', async () => {
             const apiHeader = 'TestAPIHeader';
             process.env.FUN_TRANSLATION_KEY = apiHeader
             if (!nock.isActive()) nock.activate();
