@@ -11,8 +11,12 @@ chai.should();
 describe('Pokemon Service', () => {
     describe('getPokemonDescriptionByName', () => {
         let env;
-        before(() => {
+        beforeEach(() => {
             env = process.env
+        });
+
+        afterEach(() => {
+            process.env = env
         });
 
         it('should return Error when give a null or empty name', async () => {
@@ -32,6 +36,19 @@ describe('Pokemon Service', () => {
             pokemon.description.should.be.to.equal(pokemonSuccessResponse.methodResponse.description);
         })
 
+        it('should return string without escape character', async () => {
+            process.env.POKEMON_GAME_VERSION = 'ruby'
+            const P = new Pokedex();
+            sinon.stub(P, "getPokemonSpeciesByName").callsFake(() => pokemonSuccessResponse.apiResponse);
+            const pokemonName = 'charizard';
+            const pokemon: PokemonDescription = await getPokemonDescriptionByName(pokemonName, P);
+            pokemon.description.should.not.include('\n');
+            pokemon.description.should.not.include('\r');
+            pokemon.description.should.not.include('\t');
+            pokemon.description.should.not.include('\f');
+        })
+
+
         it('should return Error "Not Found" when give a non-existent Pokemon name', async () => {
             const P = new Pokedex();
             sinon.stub(P, "getPokemonSpeciesByName").throws(new Error("Not found with status code 404"));
@@ -50,6 +67,18 @@ describe('Pokemon Service', () => {
             await getPokemonDescriptionByName('absol', P).should.be.rejectedWith(Error, "Pokemon not found");
         })
 
-        after(() => process.env = env);
+        it('should return Error if the service Pokedex is down', async () => {
+            const P = new Pokedex();
+            sinon.stub(P, "getPokemonSpeciesByName").throws(new Error('ENOTFOUND pokeapi.co'))
+            await getPokemonDescriptionByName('absol', P).should.be.rejectedWith(Error, "Error in get Pokemon Description by name");
+        })
+
+        it('should return Error "Timeout" when the api is in timeout', async () => {
+            const P = new Pokedex({timeout: 1});
+            sinon.stub(P, "getPokemonSpeciesByName").throws(new Error('timeout of 1ms exceeded'))
+            process.env.POKEMON_GAME_VERSION = 'ruby'
+            await getPokemonDescriptionByName('absol', P).should.be.rejectedWith(Error, "Get Pokemon Description service in timeout");
+        })
+
     });
 });

@@ -2,6 +2,9 @@ import Pokedex from 'pokedex-promise-v2'
 import logger from "../helpers/logger";
 
 const options = {
+    protocol: 'https',
+    hostName: 'pokeapi.co',
+    versionPath: '/api/v2/',
     timeout: process.env.EXTERNAL_API_TIMEOUT
 }
 const P = new Pokedex(options);
@@ -25,6 +28,7 @@ export const getPokemonDescriptionByName = async (pokemonName: string, pokedex: 
         return {name, gameVersion: flavor.version.name, description};
     } catch (e) {
         logger.debug("Error in getPokemonDescriptionByName", e);
+        if (e.message && e.message.includes('timeout')) throw new Error("Get Pokemon Description service in timeout")
         if (e.message && e.message.includes('Pokemon not found')) throw e;
         if (e.message && e.message.includes('status code 404')) throw new Error("Pokemon not found");
         throw new Error("Error in get Pokemon Description by name");
