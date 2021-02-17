@@ -29,7 +29,7 @@ export const getPokemon = async (req: Express.Request, res: Express.Response) =>
             message = 'Request timeout';
         }
         logger.error(GENERIC_ERROR_MESSAGE_LOG, e);
-        res.status(statusCode).json({error: message});
+        return res.status(statusCode).json({error: message});
     }
 
     let translate;
@@ -43,7 +43,7 @@ export const getPokemon = async (req: Express.Request, res: Express.Response) =>
             message = 'Request timeout';
         }
         logger.error(GENERIC_ERROR_MESSAGE_LOG, e);
-        res.status(statusCode).json({error: message});
+        return res.status(statusCode).json({error: message});
     }
     const pokemon: Pokemon = {name: pokemonDescription.name, description: translate};
     res.status(StatusCodes.OK).json(pokemon);
