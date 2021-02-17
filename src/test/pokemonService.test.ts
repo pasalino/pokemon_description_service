@@ -16,6 +16,7 @@ describe('Pokemon Service', () => {
         });
 
         afterEach(() => {
+            sinon.restore();
             process.env = env
         });
 

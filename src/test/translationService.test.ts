@@ -10,6 +10,7 @@ chai.should();
 describe('Shakespearean Translation Service', () => {
 
     afterEach(() => {
+        nock.restore();
         nock.cleanAll();
     })
 
@@ -32,7 +33,6 @@ describe('Shakespearean Translation Service', () => {
         const translation = await translateInShakespearean(text);
         translation.should.be.to.equal(translateSuccessResponse.contents.translated);
         nock.isDone().should.be.true;
-        nock.restore();
     });
 
     it('should return Error in translation if total!==1', async () => {
@@ -45,7 +45,6 @@ describe('Shakespearean Translation Service', () => {
         const text = "Hi, my friend. How are you?"
         await translateInShakespearean(text).should.be.rejectedWith(Error, "Error in translation. Translation is not unique or is null");
         nock.isDone().should.be.true;
-        nock.restore();
     });
 
     it('should return "Error Quota reached" if is out of quota', async () => {
@@ -58,7 +57,6 @@ describe('Shakespearean Translation Service', () => {
         const text = "Hi, my friend. How are you?"
         await translateInShakespearean(text).should.be.rejectedWith(Error, "Maximus quota reached in translate service");
         nock.isDone().should.be.true;
-        nock.restore();
     });
 
     it('should return generic in translate if the api is in Error', async () => {
@@ -71,7 +69,6 @@ describe('Shakespearean Translation Service', () => {
         const text = "Hi, my friend. How are you?"
         await translateInShakespearean(text).should.be.rejectedWith(Error, "Error translate in shakespearean");
         nock.isDone().should.be.true;
-        nock.restore();
     });
 
     describe('Timeout', () => {
@@ -91,7 +88,6 @@ describe('Shakespearean Translation Service', () => {
             const text = "Hi, my friend. How are you?"
             await translateInShakespearean(text).should.be.rejectedWith(Error, "Translation service in timeout");
             nock.isDone().should.be.true;
-            nock.restore();
         });
 
         after(() => process.env = env);
@@ -117,7 +113,6 @@ describe('Shakespearean Translation Service', () => {
             const text = "Hi, my friend. How are you?"
             await translateInShakespearean(text);
             nock.isDone().should.be.true;
-            nock.restore();
         });
 
         after(() => process.env = env);
