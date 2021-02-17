@@ -61,6 +61,19 @@ describe('Shakespearean Translation Service', () => {
         nock.restore();
     });
 
+    it('should return generic in translate if the api is in Error', async () => {
+        if (!nock.isActive()) nock.activate();
+
+        nock(FUN_TRANSLATIONS_BASE_URL)
+            .post(TRANSLATE_IN_SHAKESPEAREAN_PATH, {text: /.*/})
+            .reply(500, {});
+
+        const text = "Hi, my friend. How are you?"
+        await translateInShakespearean(text).should.be.rejectedWith(Error, "Error translate in shakespearean");
+        nock.isDone().should.be.true;
+        nock.restore();
+    });
+
     describe('Timeout', () => {
         let env;
         before(() => env = process.env);
