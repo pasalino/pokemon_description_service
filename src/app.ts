@@ -7,6 +7,10 @@ if (!process.env.FUN_TRANSLATION_KEY) {
     logger.warn('Translate API Key not provided');
 }
 
+if (process.env.NODE_ENV !== 'production') {
+    logger.warn('Server not in production mode!');
+}
+
 logger.info(`Pokemon game's version: ${process.env.POKEMON_GAME_VERSION}`);
 
 const app = express();

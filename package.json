@@ -5,7 +5,10 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "tsc && NODE_ENV=development node -r dotenv-flow/config dist/app.js",
-    "test": "NODE_ENV=test mocha ./src/test/fixtures.ts ./src/tests -r dotenv-flow/config --require ts-node/register 'src/**/*.test.ts' --exit"
+    "start:production": "tsc && NODE_ENV=production node -r dotenv-flow/config dist/app.js",
+    "test": "NODE_ENV=test mocha ./src/test/fixtures.ts ./src/tests -r dotenv-flow/config --require ts-node/register 'src/**/*.test.ts' --exit",
+    "build": "tsc",
+    "build:docker": "tsc && docker build . --tag pokemon_descriptions_service"
   },
   "author": "Pasqualino de Simone",
   "license": "ISC",
